@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('package', function (Blueprint $table) {
+        Schema::create('package_attraction', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('package_flight_id')->nullable()->constrained('package_flight')->onDelete('cascade');
-            $table->foreignId('package_hotel_id')->nullable()->constrained('package_hotel')->onDelete('cascade');
-            $table->foreignId('package_attraction_id')->nullable()->constrained('package_attraction')->onDelete('cascade');
-            $table->integer('price');
+            $table->bigInteger('e_ticket_id')->unsigned()->constrained('e_ticket')->onDelete('cascade');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('package');
+        Schema::dropIfExists('package_attraction');
     }
 };
