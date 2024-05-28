@@ -53,15 +53,54 @@ class travelAgentController extends Controller
         return response()->json($travel_agent);
     }
 
+    public function create(){
+        // menamplikan form
+    }
+
     public function edit($id){
         // nampilin form edit
     }
 
-    public function update($id){
-        // proses ganti data
+    public function update(Request $request,$id){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'contact_info' => 'required|string',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'message' => 'No Travel Agent found'
+            ],404);
+        }else{
+            $travel_agent = travelAgent::find($id);
+            if($travel_agent){
+                $travel_agent->update([
+                    'name' => $request->name,
+                    'contact_info' => $request->contact_info,
+                ]);
+
+                if ($request->has('packages')) {
+                    $travel_agent->packages()->delete();
+                    
+                    foreach ($request->packages as $packageData) {
+                        $travel_agent->packages()->create($packageData);
+                    }
+                }
+            }
+        }
     }
+    
 
     public function destroy($id){
-        // hapus data
+        $travel_agent = travelAgent::find($id);
+        if($travel_agent){
+            $travel_agent->delete();
+            return response()->json([
+                'message' => "Travel Agent Deleted"
+            ]);
+        }else{
+            return response()->json([
+                'message' => "No Travel Agent Found"
+            ],404);
+        }
     }
 }

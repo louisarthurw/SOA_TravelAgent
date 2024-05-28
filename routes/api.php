@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\packageController;
+use App\Http\Controllers\packageDetailController;
 use App\Http\Controllers\travelAgentController;
+use App\Models\package;
 use App\Models\travelAgent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +30,16 @@ Route::get('travelAgent/{id}', [travelAgentController::class,'show']);
 Route::post('travelAgent',[travelAgentController::class,'store']);
 Route::delete('travelAgent/{id}',[travelAgentController::class,'destroy']);
 Route::put('travelAgent/{id}',[travelAgentController::class,'update']);
+Route::get('travelAgent/{id}/packages', [packageController::class, 'index']);
 
 
 //package
-Route::get('travelAgent/{id}/packages', [packageController::class, 'index']);
+Route::post('packages',[packageController::class, 'store']);
+Route::delete('packages/{id}',[packageController::class, 'destroy']);
+Route::put('packages/{id}',[packageController::class, 'update']);
+
+
+//detail
+Route::post('detail',[packageDetailController::class, 'store']);
+Route::put('detail/{id}',[packageDetailController::class, 'update']);
+Route::delete('detail/{id}', [packageDetailController::class, 'destroy']);

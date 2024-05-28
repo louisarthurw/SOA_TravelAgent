@@ -11,6 +11,14 @@ class package extends Model
  
     protected $table = 'package';
 
+    protected $fillable = [
+        'travel_agent_id',
+        'flight_id',
+        'hotel_id',
+        'attraction_id',
+        'price'
+    ];
+
     public function travel_agent(){
         return $this->belongsTo(travelAgent::class);
     }
