@@ -16,7 +16,7 @@ class travelAgent extends Model
         'contact_info'
     ];
 
-    // public function package(){
-    //     return $this->hasMany(package::class);
-    // }
+    public function packages(){
+        return $this->hasMany(package::class);
+    }
 }
