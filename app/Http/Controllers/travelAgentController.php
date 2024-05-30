@@ -36,21 +36,25 @@ class travelAgentController extends Controller
         $travel_agent = travelAgent::create([
             'name' => $request->name,
             'contact_info' => $request->contact_info
+            
         ]);
-
-        if ($request->has('packages')) {
-                $travel_agent->packages()->create([
-                ]);
         return response()->json([
-            'message' => "Travel Agent Created Successfully"
-        ], 200);
-
-    }
+            'message' => "Travel Agent Created Successfully",
+            'travel_agent' => $travel_agent
+        ], 201);
 }
 
     public function show($id){
-        $travel_agent = travelAgent::with('packages')->findOrFail($id);
-        return response()->json($travel_agent);
+        $travel_agent = travelAgent::with('packages')->find($id);
+        if($travel_agent){
+            return response()->json([
+                "Travel Agent" => $travel_agent
+            ]);
+        }else{
+            return response()->json([
+                'message' => "Travel Agent Not Found"
+            ], 404);
+        }
     }
 
     public function create(){

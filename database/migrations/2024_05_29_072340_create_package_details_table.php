@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('departure_date');
             $table->date('return_date');
             $table->integer('number_of_people');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
