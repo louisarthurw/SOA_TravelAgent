@@ -25,10 +25,11 @@ class packageController extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
             'travel_agent_id' => 'required|exists:travel_agent,id',
-            'flight_id' => 'nullable|exists:ticket,id',
-            'hotel_id' => 'nullable|exists:hotel_reservation,id',
-            'attraction_id' => 'nullable|exists:e_ticket,id',
+            'departure_date' => 'required|date',
+            'return_date' => 'required|date',
+            'number_of_people' => 'required|integer',
             'price' => 'required|integer',
+            'quota' => 'required|integer'
         ]);
     
         if ($validator->fails()) {
@@ -40,10 +41,11 @@ class packageController extends Controller
     
         $package = Package::create([
             'travel_agent_id' => $request->travel_agent_id,
-            'flight_id' => $request->flight_id,
-            'hotel_id' => $request->hotel_id,
-            'attraction_id' => $request->attraction_id,
+            'departure_date' => $request->departure_date,
+            'return_date' => $request->return_date,
+            'number_of_people' => $request->number_of_people,
             'price' => $request->price,
+            'quota' => $request->quota
         ]);
     
         return response()->json([
@@ -54,10 +56,11 @@ class packageController extends Controller
 
     public function update(Request $request, $id){
         $validator = Validator::make($request->all(), [
-            'flight_id' => 'nullable|exists:ticket,id',
-            'hotel_id' => 'nullable|exists:hotel_reservation,id',
-            'attraction_id' => 'nullable|exists:e_ticket,id',
+            'departure_date' => 'required|date',
+            'return_date' => 'required|date',
+            'number_of_people' => 'required|integer',
             'price' => 'required|integer',
+            'quota' => 'required|integer'
         ]);
     
         if ($validator->fails()) {
@@ -67,19 +70,25 @@ class packageController extends Controller
             ], 422);
         }
     
-        $package = Package::findOrFail($id);
+        $package = Package::find($id);
+        if(!$package){
+            return response()->json([
+                "message" => "Package not found"
+            ],404);
+        }else{
         $package->update([
-            'flight_id' => $request->flight_id,
-            'hotel_id' => $request->hotel_id,
-            'attraction_id' => $request->attraction_id,
+            'departure_date' => $request->departure_date,
+            'return_date' => $request->return_date,
+            'number_of_people' => $request->number_of_people,
             'price' => $request->price,
+            'quota' => $request->quota
         ]);
-    
         return response()->json([
             'message' => "Package Updated Successfully",
             'package' => $package
         ], 200);
     }
+}
 
     public function destroy($id){
         $package = Package::find($id);

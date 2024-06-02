@@ -13,15 +13,26 @@ class packageDetail extends Model
 
     protected $fillable = [
         'package_id',
+        'day',
         'description',
         'origin_city',
         'destination_city',
-        'departure_date',
-        'return_date',
         'number_of_people'
     ];
 
     public function package(){
         return $this->belongsTo(package::class);
+    }
+
+    public function hotelDetails(){
+        return $this->hasMany(hotelDetail::class);
+    }
+
+    public function flightDetails(){
+        return $this->hasMany(flightDetail::class);
+    }
+
+    public function attractionDetails(){
+        return $this->hasMany(attractionDetail::class);
     }
 }

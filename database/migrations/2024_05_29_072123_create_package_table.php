@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('package', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('travel_agent_id')->constrained('travel_agent')->onDelete('cascade');
-            $table->foreignId('flight_id')->nullable()->constrained('hotel_reservation')->onDelete('cascade');
-            $table->foreignId('hotel_id')->nullable()->constrained('ticket')->onDelete('cascade');
-            $table->foreignId('attraction_id')->nullable()->constrained('e_ticket')->onDelete('cascade');
+            $table->foreignId('travel_agent_id')->constrained('travel_agent')->onDelete('cascade')->unsigned();
+            $table->date('departure_date');
+            $table->date('return_date');
+            $table->string('number_of_people');
+            $table->integer('quota');
             $table->integer('price');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

@@ -81,14 +81,6 @@ class travelAgentController extends Controller
                     'name' => $request->name,
                     'contact_info' => $request->contact_info,
                 ]);
-
-                if ($request->has('packages')) {
-                    $travel_agent->packages()->delete();
-                    
-                    foreach ($request->packages as $packageData) {
-                        $travel_agent->packages()->create($packageData);
-                    }
-                }
             }
         }
     }

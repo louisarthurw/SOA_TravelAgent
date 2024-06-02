@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('package_details', function (Blueprint $table) {
             $table->id()->constrained();
-            $table->foreignId('package_id')->constrained('package')->unsigned();
+            $table->foreignId('package_id')->constrained('package')->onDelete('cascade')->unsigned();
             $table->string('description');
             $table->string('origin_city');
             $table->string('destination_city');
-            $table->date('departure_date');
-            $table->date('return_date');
+ 
             $table->integer('number_of_people');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

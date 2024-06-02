@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('e_ticket', function (Blueprint $table) {
+        Schema::create('attraction_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('package_details_id')->constrained('package_details')->onDelete('cascade');
+            $table->string('attraction_name');
+            $table->string('description');
+            $table->date('visit_date');
+            $table->integer('entry_fee');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
@@ -21,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('e_ticket');
+        Schema::dropIfExists('attraction_details');
     }
 };

@@ -13,10 +13,11 @@ class package extends Model
 
     protected $fillable = [
         'travel_agent_id',
-        'flight_id',
-        'hotel_id',
-        'attraction_id',
-        'price'
+        'departure_date',
+        'return_date',
+        'number_of_people',
+        'price',
+        'quota'
     ];
 
     public function travel_agent(){
@@ -24,6 +25,6 @@ class package extends Model
     }
 
     public function detail(){
-        return $this->hasOne(packageDetail::class);
+        return $this->hasMany(packageDetail::class);
     }
 }
