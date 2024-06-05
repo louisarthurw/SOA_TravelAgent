@@ -17,7 +17,6 @@ class packageDetail extends Model
         'description',
         'origin_city',
         'destination_city',
-        'number_of_people'
     ];
 
     public function package(){

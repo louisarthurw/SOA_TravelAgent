@@ -12,7 +12,6 @@ class hotelDetail extends Model
     protected $table = 'hotel_details';
 
     protected $fillable = [
-        'package_details_id',
         'hotel_name',
         'address',
         'room_type',

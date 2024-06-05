@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('package', function (Blueprint $table) {
             $table->id();
             $table->foreignId('travel_agent_id')->constrained('travel_agent')->onDelete('cascade')->unsigned();
+            $table->string('description');
             $table->date('departure_date');
             $table->date('return_date');
             $table->string('number_of_people');

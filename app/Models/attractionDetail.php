@@ -12,7 +12,6 @@ class attractionDetail extends Model
     protected $table = 'attraction_details';
 
     protected $fillable = [
-        'package_details_id',
         'attraction_name',
         'description',
         'visit_date',

@@ -25,6 +25,7 @@ class packageController extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
             'travel_agent_id' => 'required|exists:travel_agent,id',
+            'description' => 'required|string',
             'departure_date' => 'required|date',
             'return_date' => 'required|date',
             'number_of_people' => 'required|integer',
@@ -41,6 +42,7 @@ class packageController extends Controller
     
         $package = Package::create([
             'travel_agent_id' => $request->travel_agent_id,
+            'description' => $request->description,
             'departure_date' => $request->departure_date,
             'return_date' => $request->return_date,
             'number_of_people' => $request->number_of_people,
@@ -56,6 +58,7 @@ class packageController extends Controller
 
     public function update(Request $request, $id){
         $validator = Validator::make($request->all(), [
+            'description' => 'required|string',
             'departure_date' => 'required|date',
             'return_date' => 'required|date',
             'number_of_people' => 'required|integer',
@@ -77,6 +80,7 @@ class packageController extends Controller
             ],404);
         }else{
         $package->update([
+            'description' => 'required|string',
             'departure_date' => $request->departure_date,
             'return_date' => $request->return_date,
             'number_of_people' => $request->number_of_people,

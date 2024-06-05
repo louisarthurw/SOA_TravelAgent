@@ -13,6 +13,7 @@ class package extends Model
 
     protected $fillable = [
         'travel_agent_id',
+        'description',
         'departure_date',
         'return_date',
         'number_of_people',

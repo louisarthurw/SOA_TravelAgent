@@ -12,7 +12,6 @@ class flightDetail extends Model
     protected $table = 'flight_details';
 
     protected $fillable = [
-        'package_details_id',
         'airline_name',
         'flight_number',
         'departure_time',
